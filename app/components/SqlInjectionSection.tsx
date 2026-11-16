@@ -7,7 +7,7 @@ import { SectionCard } from "./SectionCard";
 
 const EXAMPLES = [
   { label: "Običan unos", value: "Željka" },
-  { label: "Tautologija", value: "' OR 1=1 --" },
+  { label: "Tautologija", value: "' OR 1 --" },
   { label: "UNION upit", value: "' UNION SELECT id, username, iban, balance FROM users --" },
   { label: "Ilegalan upit", value: "' ORDER BY 9 --" },
 ];
@@ -35,6 +35,10 @@ export function SqlInjectionSection({ enabled }: { enabled: boolean }) {
             upit</strong> (prikazana pogreška otkriva da originalni upit ima četiri stupca, što napadač može koristiti za
             UNION). Kad je ranjivost isključena, upit je parametriziran, a unos se validira, pa isti unosi postaju samo
             tekst za pretragu.
+          </p>
+          <p>
+            Napomena: mnogi "klasični" oblici tautologije poput 1=1 su blokirani na Renderu zbog Cloudflare WAF-a
+            (aplikacija dobije 403), no rade lokalno. Ovdje se koristi alternativni oblik koji radi na Renderu.
           </p>
         </>
       }
